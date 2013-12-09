@@ -1,4 +1,4 @@
-# Rerouter Craft Plugin
+# Reroute Craft Plugin
 
 Manage 301 redirects in the control panel.
 
