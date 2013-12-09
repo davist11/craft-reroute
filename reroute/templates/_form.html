@@ -1,0 +1,44 @@
+{% extends '_layouts/cp' %}
+{% import '_includes/forms' as forms %}
+
+{% if rerouteId is not defined %}{% set rerouteId = null %}{% endif %}
+{% if reroute is not defined %}
+    {% if rerouteId %}
+        {% set reroute = craft.reroute.getById(rerouteId) %}
+        {% if not reroute %}{% exit 404 %}{% endif %}
+    {% else %}
+        {% set reroute = null %}
+    {% endif %}
+{% endif %}
+
+{% set title = reroute ? 'Edit Reroute'|t : 'New Reroute'|t %}
+
+{% set content %}
+	<form method="post" action="">
+		<input type="hidden" name="action" value="reroute/save" />
+		<input type="hidden" name="redirect" value="reroute" />
+		<input type="hidden" name="rerouteId" value="{{ rerouteId }}" />
+
+		{{ forms.textField({
+			label: 'Old Url'|t,
+			required: true,
+			name: 'reroute[oldUrl]',
+			value: reroute ? reroute.oldUrl : null,
+			errors: reroute ? reroute.errors('oldUrl') : null,
+			instructions: 'Enter relative urls, ex: /path-to-url'
+		}) }}
+
+		{{ forms.textField({
+			label: 'New Url'|t,
+			required: true,
+			name: 'reroute[newUrl]',
+			value: reroute ? reroute.newUrl : null,
+			errors: reroute ? reroute.errors('newUrl') : null,
+		}) }}
+
+		<div class="buttons">
+			<input type="submit" class="btn submit" value="{{ 'Save'|t }}">
+		</div>
+	</form>
+
+{% endset %}
