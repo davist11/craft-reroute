@@ -7,3 +7,4 @@ Manage 301 redirects in the control panel.
 ## Planned Features
 
 * Regex matching
+* 301/302 Options
