@@ -9,7 +9,7 @@ class RerouteController extends BaseController
 	 */
 	public function __construct()
 	{
-    	$this->requirePostRequest();
+		$this->requirePostRequest();
 	}
 
 
@@ -29,6 +29,7 @@ class RerouteController extends BaseController
 		$data = craft()->request->getPost('reroute');
 		$model->oldUrl = $data['oldUrl'];
 		$model->newUrl = $data['newUrl'];
+		$model->type = $data['type'];
 
 		// Did we pass validation?
 		if($model->validate()) {

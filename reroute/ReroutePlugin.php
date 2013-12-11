@@ -29,7 +29,7 @@ class ReroutePlugin extends BasePlugin
 		return true;
 	}
 
-	public function hookRegisterCpRoutes()
+	public function registerCpRoutes()
 	{
 		return array(
 			'reroute\/new' => 'reroute/_form',
@@ -43,7 +43,7 @@ class ReroutePlugin extends BasePlugin
 			$reroute = craft()->reroute->getByUrl($url);
 
 			if ($reroute) {
-				craft()->request->redirect($reroute['newUrl'], true, 301);
+				craft()->request->redirect($reroute['newUrl'], true, $reroute['type']);
 			}
 		}
 	}
