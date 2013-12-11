@@ -3,12 +3,12 @@
 
 {% if rerouteId is not defined %}{% set rerouteId = null %}{% endif %}
 {% if reroute is not defined %}
-    {% if rerouteId %}
-        {% set reroute = craft.reroute.getById(rerouteId) %}
-        {% if not reroute %}{% exit 404 %}{% endif %}
-    {% else %}
-        {% set reroute = null %}
-    {% endif %}
+	{% if rerouteId %}
+		{% set reroute = craft.reroute.getById(rerouteId) %}
+		{% if not reroute %}{% exit 404 %}{% endif %}
+	{% else %}
+		{% set reroute = null %}
+	{% endif %}
 {% endif %}
 
 {% set title = reroute ? 'Edit Reroute'|t : 'New Reroute'|t %}
@@ -34,6 +34,15 @@
 			name: 'reroute[newUrl]',
 			value: reroute ? reroute.newUrl : null,
 			errors: reroute ? reroute.errors('newUrl') : null,
+		}) }}
+
+		{{ forms.select({
+			label: 'Type',
+			required: true,
+			name: 'reroute[type]',
+			value: reroute ? reroute.type : 301,
+			errors: reroute ? reroute.errors('newUrl') : null,
+			options: [301, 302]
 		}) }}
 
 		<div class="buttons">
