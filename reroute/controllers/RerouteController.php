@@ -29,6 +29,7 @@ class RerouteController extends BaseController
 		$data = craft()->request->getPost('reroute');
 		$model->oldUrl = $data['oldUrl'];
 		$model->newUrl = $data['newUrl'];
+		$model->method = $data['method'];
 
 		// Did we pass validation?
 		if($model->validate()) {

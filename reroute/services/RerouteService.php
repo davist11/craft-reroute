@@ -26,7 +26,7 @@ class RerouteService extends BaseApplicationComponent
 	public function getAll()
 	{
 		$reroutes = craft()->db->createCommand()
-					->select('id, oldUrl, newUrl')
+					->select('id, oldUrl, newUrl, method')
 					->from('reroute')
 					->queryAll();
 
@@ -54,7 +54,7 @@ class RerouteService extends BaseApplicationComponent
 	 */
 	public function getByUrl($url) {
 		$reroute = craft()->db->createCommand()
-					->select('id, oldUrl, newUrl')
+					->select('id, oldUrl, newUrl, method')
 					->from('reroute')
 					->where('oldUrl = :url', array(':url' => $url))
 					->limit(1)
