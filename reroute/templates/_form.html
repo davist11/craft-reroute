@@ -15,9 +15,10 @@
 
 {% set content %}
 	<form method="post" action="">
-		<input type="hidden" name="action" value="reroute/save" />
-		<input type="hidden" name="redirect" value="reroute" />
-		<input type="hidden" name="rerouteId" value="{{ rerouteId }}" />
+		<input type="hidden" name="action" value="reroute/save">
+		<input type="hidden" name="redirect" value="reroute">
+		<input type="hidden" name="rerouteId" value="{{ rerouteId }}">
+		<input type="hidden" name="{{ craft.config.csrfTokenName }}" value="{{ craft.request.csrfToken }}">
 
 		{{ forms.textField({
 			label: 'Old Url'|t,
