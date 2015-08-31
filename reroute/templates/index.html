@@ -2,6 +2,7 @@
 
 {% set title = 'Reroute'|t %}
 {% set reroutes = craft.reroute.getAll %}
+{% set truncate = 60 %}
 
 {% set content %}
 	{% if reroutes | length == 0 %}
@@ -22,8 +23,8 @@
 			<tbody>
 				{% for reroute in reroutes %}
 					<tr data-id="{{ reroute.id }}" data-name="{{ 'Reroute for {url}' | t({ url: reroute.oldUrl }) }}">
-						<td><a href="{{ url('reroute/'~reroute.id) }}">{{ reroute.oldUrl }}</a></td>
-						<td>{{ reroute.newUrl }}</td>
+						<td><a href="{{ url('reroute/'~reroute.id) }}">{{ reroute.oldUrl [0:truncate] }}{{ reroute.oldUrl|length > truncate ? '...' }}</a></td>
+						<td>{{ reroute.newUrl [0:truncate] }}{{ reroute.newUrl|length > truncate ? '...' }}</td>
 						<td>{{ reroute.method }}</td>
 						<td><a href="{{ reroute.oldUrl }}" target="_blank" class="go">{{ 'View'|t }}</a></td>
 						<td><a class="delete icon" title="{{ 'Delete'|t }}"></a></td>
