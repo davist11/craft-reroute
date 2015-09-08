@@ -53,6 +53,10 @@ class RerouteService extends BaseApplicationComponent
 	 * @return array
 	 */
 	public function getByUrl($url) {
+		// Remove any trailing slashes from the URL before looking it up:
+		// (to ensure /page and /page/ are treated the same)
+		$url = rtrim($url, '/');
+	
 		$reroute = craft()->db->createCommand()
 					->select('id, oldUrl, newUrl, method')
 					->from('reroute')
