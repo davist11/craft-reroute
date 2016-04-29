@@ -11,7 +11,7 @@ class ReroutePlugin extends BasePlugin
 
 	public function getVersion()
 	{
-		return '1.0.3';
+		return '1.0.4';
 	}
 
 	public function getDeveloper()
@@ -38,12 +38,23 @@ class ReroutePlugin extends BasePlugin
 	}
 
 	public function init() {
-		if(craft()->request->isSiteRequest()) {
+		if(!craft()->isConsole() && craft()->request->isSiteRequest()) {
 			$url = craft()->request->getUrl();
 			$reroute = craft()->reroute->getByUrl($url);
 
 			if ($reroute) {
 				craft()->request->redirect($reroute['newUrl'], true, $reroute['method']);
+			} else {
+				$urlParts = parse_url($url);
+				$rerouteWithoutQueryString = craft()->reroute->getByUrl($urlParts['path']);
+
+				if ($rerouteWithoutQueryString) {
+					$glue = (strpos($rerouteWithoutQueryString['newUrl'], '?') === FALSE) ? '?' : '&';
+
+					$redirectUrl = isset($urlParts['query']) ? $rerouteWithoutQueryString['newUrl'] . $glue . $urlParts['query'] : $rerouteWithoutQueryString['newUrl'];
+
+					craft()->request->redirect($redirectUrl, true, $rerouteWithoutQueryString['method']);
+				}
 			}
 		}
 	}
