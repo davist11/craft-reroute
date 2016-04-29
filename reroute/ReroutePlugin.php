@@ -24,6 +24,16 @@ class ReroutePlugin extends BasePlugin
 		return 'http://trevordavis.net';
 	}
 
+	public function getDocumentationUrl()
+	{
+		return 'https://github.com/davist11/craft-reroute';
+	}
+
+	public function getReleaseFeedUrl()
+	{
+		return 'https://raw.githubusercontent.com/davist11/craft-reroute/master/releases.json';
+	}
+
 	public function hasCpSection()
 	{
 		return true;

@@ -1,0 +1,11 @@
+[
+    {
+        "version": "1.0.4",
+        "downloadUrl": "https://github.com/davist11/craft-reroute/archive/v1.0.4.zip",
+        "date": "2016-04-29T15:28:00-00:00",
+        "notes": [
+        	"[Added] Pass along query string to the new url",
+        	"[Fixed] Fixed and error when using the Craft command line"
+        ]
+    }
+]
