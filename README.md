@@ -7,3 +7,21 @@ Manage 301/302 redirects in the control panel.
 ## Planned Features
 
 * Regex matching
+* Ajax import
+* Ajax validation and logging of import
+* Include plugins resources on plugin page only
+
+## Import Support
+
+The following file formats are supported .csv .txt
+
+## Import Configuration
+
+Delimiter defaults to ';'
+Custom delimiter can be configured:
+
+```php
+return array(
+	'delimiter' => ';'
+);
+```

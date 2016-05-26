@@ -4,6 +4,7 @@
 {% set reroutes = craft.reroute.getAll %}
 
 {% set content %}
+
 	{% if reroutes | length == 0 %}
 		<p id="no-reroutes">{{ 'There are no reroutes!'|t }}</p>
 	{% else %}
@@ -35,16 +36,14 @@
 
 	<div class="buttons">
 		<a href="{{ url('reroute/new') }}" class="btn submit add icon">{{ 'New Reroute'|t }}</a>
+		<form class="upload-modal__form" method="post" action="" accept-charset="UTF-8" enctype="multipart/form-data">
+			<input type="hidden" name="action" value="reroute/upload">
+			<input type="hidden" name="{{ craft.config.csrfTokenName }}" value="{{ craft.request.csrfToken }}">
+			<input id="file" type="file" multiple="multiple" class="upload-modal__file" name="files[]">
+			<label class="label-file upload-modal__label" for="file">
+				<div class="btn submit icon" data-icon="upload">{{ "Import"|t }}</div>
+			</label>
+		</form>		
 	</div>
 
 {% endset %}
-
-{% set js %}
-	new Craft.AdminTable({
-		tableSelector: '#reroutes',
-		noObjectsSelector: '#no-reroutes',
-		deleteAction: 'reroute/delete'
-	});
-{% endset %}
-
-{% includeJs js %}

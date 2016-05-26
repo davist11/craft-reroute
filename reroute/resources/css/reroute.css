@@ -1,0 +1,12 @@
+/**
+ * Reroute css
+ */
+
+.upload-modal__file {
+	display: none;
+}
+
+.upload-modal__label {
+	display: inline-block;
+	margin: 5px 5px 0px 0px;
+}

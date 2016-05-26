@@ -11,7 +11,7 @@ class ReroutePlugin extends BasePlugin
 
 	public function getVersion()
 	{
-		return '1.0.4';
+		return '1.0.5';
 	}
 
 	public function getDeveloper()
@@ -48,6 +48,13 @@ class ReroutePlugin extends BasePlugin
 	}
 
 	public function init() {
+		// import plugins resources
+	    if ( craft()->request->isCpRequest() && craft()->userSession->isLoggedIn() )
+    	{
+    		craft()->templates->includeJsResource('reroute/js/reroute.js');
+    		craft()->templates->includeCssResource('reroute/css/reroute.css');
+    	}
+
 		if(!craft()->isConsole() && craft()->request->isSiteRequest()) {
 			$url = craft()->request->getUrl();
 			$reroute = craft()->reroute->getByUrl($url);
