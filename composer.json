@@ -1,0 +1,43 @@
+{
+    "name": "davist11/craft-reroute",
+    "description": "Manage 301/302 redirects in the control panel.",
+    "type": "craft-plugin",
+    "version": "2.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "reroute"
+    ],
+    "support": {
+        "docs": "https://github.com/davist11/craft-reroute/blob/master/README.md",
+        "issues": "https://github.com/davist11/craft-reroute/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Trevor Davis",
+            "homepage": "https://www.trevor-davis.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "davist11\\reroute\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Reroute",
+        "handle": "reroute",
+        "hasCpSettings": false,
+        "hasCpSection": true,
+        "changelogUrl": "https://raw.githubusercontent.com/davist11/craft-reroute/master/CHANGELOG.md",
+        "components": {
+            "rerouteService": "davist11\\reroute\\services\\RerouteService"
+        },
+        "class": "davist11\\reroute\\Reroute"
+    }
+}

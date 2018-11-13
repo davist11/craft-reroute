@@ -1,0 +1,85 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Reroute plugin for Craft CMS 3.x
+ *
+ * Reroute index.twig
+ *
+ * @author    Trevor Davis
+ * @copyright Copyright (c) 2018 Trevor Davis
+ * @link      https://www.trevor-davis.com
+ * @package   Reroute
+ * @since     2.0.0
+ */
+#}
+
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% set title = "Reroute" %}
+{% set reroutes = craft.reroute.getAll %}
+
+{% block actionButton %}
+    <a href="{{ url('reroute/new') }}" class="btn submit add icon">{{ 'New Reroute'|t }}</a>
+{% endblock %}
+
+{% block content %}
+    {% if reroutes | length == 0 %}
+        <p id="no-reroutes">{{ 'There are no reroutes!'|t }}</p>
+    {% else %}
+        <table id="reroutes" class="reroutes-table data fullwidth">
+            <thead>
+                <th scope="col" class="reroutes-table__url">{{ 'Old Url'|t }}</th>
+                <th scope="col" class="reroutes-table__url">{{ 'New Url'|t }}</th>
+                <th scope="col" class="reroutes-table__method">{{ 'Method'|t }}</th>
+                <th class="reroutes-table__view"></th>
+                <th class="reroutes-table__delete"></th>
+            </thead>
+            <tbody>
+                {% for reroute in reroutes %}
+                    <tr data-id="{{ reroute.id }}" data-name="{{ 'Reroute for {url}' | t({ url: reroute.oldUrl }) }}">
+                        <td><a href="{{ url('reroute/'~reroute.id) }}">{{ reroute.oldUrl }}</a></td>
+                        <td>{{ reroute.newUrl }}</td>
+                        <td>{{ reroute.method }}</td>
+                        <td><a href="{{ reroute.oldUrl }}" target="_blank" class="go">{{ 'View'|t }}</a></td>
+                        <td><a class="delete icon" title="{{ 'Delete'|t('app') }}" role="button"></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+
+{% js %}
+    new Craft.AdminTable({
+        tableSelector: '#reroutes',
+        noObjectsSelector: '#no-reroutes',
+        deleteAction: 'reroute/default/delete',
+        confirmDeleteMessage: '{{ "Are you sure you want to delete “{name}”?"|t('app') }}',
+    });
+{% endjs %}
+
+{% css %}
+    .reroutes-table {
+            table-layout: fixed;
+    }
+
+    .reroutes-table__url {
+            width: 39% !important;
+    }
+
+    .reroutes-table__method {
+            width: 7% !important;
+    }
+
+    .reroutes-table__view,
+    .reroutes-table__delete {
+            text-align: center !important;
+            width: 7% !important;
+    }
+
+    .reroutes-table td:nth-child(4n),
+    .reroutes-table td:nth-child(5n) {
+            text-align: center;
+    }
+{% endcss %}
