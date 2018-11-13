@@ -2,7 +2,7 @@
 /**
  * Reroute plugin for Craft CMS 3.x
  *
- * https://twitter.com/skoczela/status/1060025421624958976
+ * Manage 301/302 redirects in the control panel.
  *
  * @link      https://www.trevor-davis.com
  * @copyright Copyright (c) 2018 Trevor Davis
