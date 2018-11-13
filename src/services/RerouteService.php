@@ -14,7 +14,6 @@ use davist11\reroute\Reroute;
 
 use Craft;
 use craft\base\Component;
-use craft\db\Query;
 use davist11\reroute\models\RerouteModel;
 use davist11\reroute\records\RerouteRecord;
 
@@ -33,7 +32,7 @@ class RerouteService extends Component
      */
     public function getAll()
     {
-        $reroutes = (new Query())
+        $reroutes = RerouteRecord::find()
             ->select(['id', 'oldUrl', 'newUrl', 'method'])
             ->from('{{%reroute}}')
             ->all();
@@ -48,11 +47,14 @@ class RerouteService extends Component
      */
     public function getById($rerouteId)
     {
+        $model = null;
+
         if ($record = $this->_getRecordById($rerouteId)) {
             $model = new RerouteModel();
             $model->setAttributes($record->getAttributes());
-            return $model;
         }
+
+        return $model;
     }
 
     /**
@@ -85,7 +87,7 @@ class RerouteService extends Component
      * @return array
      */
     public function getByUrl($url) {
-        $reroute = (new Query())
+        $reroute = RerouteRecord::find()
             ->select(['id', 'oldUrl', 'newUrl', 'method'])
             ->from('{{%reroute}}')
             ->where(['oldUrl' => $url])
@@ -143,7 +145,9 @@ class RerouteService extends Component
      */
     private function _getRecordById($id)
     {
-        $record = RerouteRecord::find()->where(['id' => $id])->one();
+        $record = RerouteRecord::find()
+            ->where(['id' => $id])
+            ->one();
 
         return $record;
     }

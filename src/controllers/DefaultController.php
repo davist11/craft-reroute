@@ -35,7 +35,7 @@ class DefaultController extends Controller
 
         // Is this an existing entry or a new entry?
         if ($id = Craft::$app->request->post('rerouteId')) {
-            $model = Reroute::getInstance()->rerouteService->getById($id);
+            $model = Reroute::$plugin->rerouteService->getById($id);
         } else {
             $model = new RerouteModel();
         }
@@ -49,7 +49,7 @@ class DefaultController extends Controller
         $success = false;
 
         if($model->validate()) {
-            $success = Reroute::getInstance()->rerouteService->save($model);
+            $success = Reroute::$plugin->rerouteService->save($model);
         }
 
         if ($success) {
@@ -74,7 +74,7 @@ class DefaultController extends Controller
         $this->requireAcceptsJson();
 
         $id = Craft::$app->request->getRequiredParam('id');
-        $result = Reroute::getInstance()->rerouteService->deleteById($id);
+        $result = Reroute::$plugin->rerouteService->deleteById($id);
 
         return $this->asJson(['success' => $result]);
     }
