@@ -26,11 +26,11 @@ class RerouteVariable
 
     public function getAll()
     {
-        return Reroute::getInstance()->rerouteService->getAll();
+        return Reroute::$plugin->rerouteService->getAll();
     }
 
     public function getById($rerouteId)
     {
-        return Reroute::getInstance()->rerouteService->getById($rerouteId);
+        return Reroute::$plugin->rerouteService->getById($rerouteId);
     }
 }
