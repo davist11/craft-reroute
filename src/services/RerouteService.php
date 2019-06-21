@@ -69,7 +69,11 @@ class RerouteService extends Component
             $this->_redirect($reroute['newUrl'], $reroute['method']);
         } else {
             $urlParts = parse_url($url);
-            $rerouteWithoutQueryString = $this->getByUrl($urlParts['path']);
+            $path = $urlParts['path'] ?? null;
+
+            if (!$path) return;
+
+            $rerouteWithoutQueryString = $this->getByUrl($path);
 
             if ($rerouteWithoutQueryString) {
                 $glue = (strpos($rerouteWithoutQueryString['newUrl'], '?') === FALSE) ? '?' : '&';
