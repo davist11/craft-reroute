@@ -62,7 +62,7 @@ class Reroute extends Plugin
         self::$plugin = $this;
 
         // If it's a site request, determine if we have a matching reroute
-        if (Craft::$app->request->isSiteRequest) {
+        if (Craft::$app->request->isSiteRequest && !Craft::$app->request->isConsoleRequest) {
             $this->rerouteService->redirectByUrl();
         }
 
